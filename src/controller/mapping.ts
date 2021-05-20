@@ -7,7 +7,7 @@ export default new Map<string, Command>([
         usage: '!wzh addmodeid <modeId> <newModeId>',
         help: 'Append a new game mode to a specific modeId',
         regex: [
-            /^!wzh addmodeid (?<modeId>br|rmbl|plndr) (?<newModeId>.+)$/
+            /^!wzh addmodeid (?<modeId>br|rmbl|plndr|rsg) (?<newModeId>.+)$/
         ]
     }],
     ['findnewmodeids', {
