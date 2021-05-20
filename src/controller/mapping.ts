@@ -4,7 +4,7 @@ import * as commands from './commands';
 export default new Map<string, Command>([
     ['addmodeid', {
         method: commands.addModeId,
-        usage: '!wz addmodeid <modeId> <remoteModeId>',
+        usage: '!wzh addmodeid <modeId> <remoteModeId>',
         help: 'Append a new game mode to a specific modeId',
         regex: [
             /^!wzh addmodeid (?<modeId>br|rmbl|plndr) (?<newModeId>.+)$/
@@ -12,7 +12,7 @@ export default new Map<string, Command>([
     }],
     ['findnewmodeids', {
         method: commands.findNewModeIds,
-        usage: '!wz findnewmodeids',
+        usage: '!wzh findnewmodeids',
         help: 'Search for new mode IDs',
         regex: [
             /^!wzh findnewmodeids$/
