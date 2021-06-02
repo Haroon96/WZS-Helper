@@ -17,6 +17,14 @@ export default new Map<string, Command>([
         regex: [
             /^!wzh findnewmodeids$/
         ]
+    }],
+    ['guildcount', {
+        method: commands.getGuildCount,
+        usage: '!wzh guildcount',
+        help: 'Get number of guilds main bot is in',
+        regex: [
+            /^!wzh guildcount$/
+        ]
     }]
 ]);
 

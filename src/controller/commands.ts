@@ -2,6 +2,7 @@ import { Message } from "discord.js";
 import { CommandArgs, Player } from "../common/types";
 import { DAL } from "../dal/mongo-dal";
 import { getMatchModes, getWeeklyLeaderboard } from "../cod/api";
+import fetch from 'node-fetch';
 
 export async function addModeId(message: Message, args: CommandArgs) {
     const { mode, newModeId } = args;
@@ -45,3 +46,15 @@ export async function findNewModeIds(message: Message, args: CommandArgs) {
         message.reply(`New modeId for ${v} : \`${k}\``);
     });
 }
+
+export async function getGuildCount(message: Message, args: CommandArgs) {
+    const request = await fetch('https://discord.com/api/v6/users/@me/guilds', {
+        'headers': {
+            'Authorization': `Bot ${process.env.WZS_TOKEN}`
+        }
+    });
+
+    const response = await request.json();
+
+    await message.reply(`Warzone Stats is in ${response.length} guilds!`);
+} 
