@@ -7,6 +7,7 @@ class _Scheduler {
     async init(client: Client) {
         this.client = client;
         this.createJob({ command: '!wzh findnewmodeids', cron: process.env.CRON })
+        this.createJob({ command: '!wzh guildcount', cron: process.env.CRON })
     }
 
     public createJob(schedule: Schedule) {
