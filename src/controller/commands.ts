@@ -48,13 +48,36 @@ export async function findNewModeIds(message: Message, args: CommandArgs) {
 }
 
 export async function getGuildCount(message: Message, args: CommandArgs) {
-    const request = await fetch('https://discord.com/api/v6/users/@me/guilds', {
-        'headers': {
-            'Authorization': `Bot ${process.env.WZS_TOKEN}`
-        }
-    });
+    const getGuilds = async(after: string) => {
+        let url = 'https://discord.com/api/v6/users/@me/guilds';
+        if (after)  url = url + '?after=' + after;
+        const request = await fetch(url, {
+            'headers': {
+                'Authorization': `Bot ${process.env.WZS_TOKEN}`
+            }
+        });    
+        return await request.json();
+    };
 
-    const response = await request.json();
+    let after = '';
+    let guildCount = 0;
 
-    await message.reply(`Warzone Stats is in ${response.length} guilds!`);
+    while (true) {
+        // get guilds after 'after' guild
+        let response = await getGuilds(after);
+
+        // get count of guilds from response
+        let pageCount = response.length;
+
+        // if the page has 0 guilds, break loop
+        if (pageCount == 0) break;
+
+        // update guild count
+        guildCount += pageCount;
+
+        // setup for next query
+        after = response[response.length - 1].id;   
+    }
+
+    await message.reply(`Warzone Stats is in ${guildCount} guilds!`);
 } 
