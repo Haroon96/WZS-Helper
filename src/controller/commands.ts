@@ -61,23 +61,22 @@ export async function getGuildCount(message: Message, args: CommandArgs) {
 
     let after = '';
     let guildCount = 0;
+    let pageCount = -1;
 
-    while (true) {
-        // get guilds after 'after' guild
+    while (pageCount != 0) {
+        // get guilds after 'after'
         let response = await getGuilds(after);
-
-        // get count of guilds from response
-        let pageCount = response.length;
-
-        // if the page has 0 guilds, break loop
-        if (pageCount == 0) break;
-
-        // update guild count
-        guildCount += pageCount;
-
-        // setup for next query
-        after = response[response.length - 1].id;   
+        // get guild count from page
+        pageCount = response.length;
+        // if the page has some guilds
+        if (pageCount > 0) {
+            // update guild count
+            guildCount += pageCount;
+            // get id of last guild
+            after = response[response.length - 1].id;       
+        }
     }
 
+    // send message
     await message.reply(`Warzone Stats is in ${guildCount} guilds!`);
 } 

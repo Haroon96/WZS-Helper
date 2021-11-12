@@ -27,9 +27,9 @@ async function main() {
 
     bot.on('message', async(message: Message) => {
         // check if message is from approved CHANNEL_ID
-        if (message.channel.id != process.env.CHANNEL_ID) {
-            return;
-        }
+        // if (message.channel.id != process.env.CHANNEL_ID) {
+        //     return;
+        // }
 
         // check if the message is intended for the bot
         if (!message.content.startsWith('!wzh')) {
