@@ -2,6 +2,7 @@ import { Client, Message } from 'discord.js';
 import controller from './controller/controller';
 import { Scheduler } from './utilities/scheduler';
 import { DAL } from './dal/mongo-dal';
+import 'dotenv/config';
 
 async function main() {
 
